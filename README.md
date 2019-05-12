@@ -2,6 +2,7 @@
 Simple Django Web Application
 
 Make sure you have Python of version at least 2.7 or higher
+
 Make sure you have Django of version at least 1.1 or higher (latest version 2.2 is recommended)
 
 
