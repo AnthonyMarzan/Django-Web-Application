@@ -1,0 +1,8 @@
+Username			Password			Group
+-----------------------------------------------------------------------------
+admin			|	adminpassword123!	  |	SuperUser
+moniqueWar		|	defaultpassword123!	  |	Developer
+aymanMil		|	defaultpassword123!	  |	Management
+AnthonyMar		|	defaultpassword123!	  |	Admin
+indiwh			|	defaultpassword123!	  |	Consumer
+jonofa002		|	defaultpassword123!	  |	Consumer
