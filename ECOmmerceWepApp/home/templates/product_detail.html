@@ -1,0 +1,142 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ECOmmerce Product Detail</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'home/css/bootstrap/css/bootstrap.min.css' %}">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'home/css/shop-item.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{%url 'Home Page'%}">ECOmmerce</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'Home Page'%}">Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'About Us'%}">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'Products'%}">Products</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item nav-link display_text">User: {{ user.get_username }}</li>
+            <li class="nav-item display_text"><a class="nav-link" href="{% url 'logout'%}?next={% url 'Home Page' %}">logout</a></li>
+          {% else %}
+            <li class="nav-item display_text"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+          {% endif %}
+          {% if user.is_staff %}
+          <li class="nav-item nav-link display_text" id="staff">staff</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+        <h1 class="my-4">ECOmmerce</h1>
+      </div>
+      <!-- /.col-lg-3 -->
+      <div class="col-lg-9">
+        <div class="card mt-4">
+          <img class="card-img-top img-fluid" src="{{products.product_image.url}}" alt="">
+          <div class="card-body">
+            <h3 class="card-title">{{ products.product_name }}</h3>
+            <h4>{{products.product_price }}</h4>
+          </div>
+        </div>
+        <!-- /.card -->
+
+		<div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            Product Details
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{products.product_description}}</p>
+			<br>
+			<small class="text-muted">Consumer Rating &ensp;</small>
+            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+            4.0 stars
+			<br><br>
+			<a class="btn btn-primary" href="{{products.product_url}}">Link to Product Here!</a>
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            Product Reviews
+          </div>
+
+          <div class="card-body">
+            {% for review in reviews %}
+              <p>{{ review.review_text }}</p>
+              <small class="text-muted">Posted by {{ review.consumer_ID.first_name }} {{ review.consumer_ID.last_name }} on {{ review.review_date }} </small>
+              <hr>
+            {% endfor %}
+
+            {% block content %}
+              {% if form %}
+                <form action="" method="post">
+                  {% csrf_token %}
+                  {{ form }}
+                  <input type="submit" value="Submit" />
+                </form>
+              {% else %}
+                <p>Please log in to leave a review. </p>
+              {% endif %}
+            {% endblock %}
+
+          </div>
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; ECOmmerce 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

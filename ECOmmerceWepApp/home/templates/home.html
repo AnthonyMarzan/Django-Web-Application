@@ -1,0 +1,133 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ECOmmerce HomePage</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'home/css/bootstrap/css/bootstrap.min.css' %}">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'home/css/small-business.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{%url 'Home Page'%}">ECOmmerce</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{%url 'Home Page'%}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'About Us'%}">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'Products'%}">Products</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item nav-link display_text">User: {{ user.get_username }}</li>
+            <li class="nav-item display_text"><a class="nav-link" href="{% url 'logout'%}?next={% url 'Home Page' %}">logout</a></li>
+          {% else %}
+            <li class="nav-item display_text"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+          {% endif %}
+          {% if user.is_staff %}
+          <li class="nav-item nav-link display_text" id="staff">staff</li>
+          {% endif %} 
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center my-5">
+      <div class="col-lg-7">
+        <img class="img-fluid rounded mb-4 mb-lg-0" src="/media/gallery/3.jpg" alt="">
+      </div>
+      <!-- /.col-lg-8 -->
+      <div class="col-lg-5">
+        <h1 class="font-weight-light">ECOmmerce</h1>
+        <p>ECOmmerce is the best Web App tool, for finding and comparing eco-friendly products! Our aim is to make it as simple and easy as possible to find a wide range of products and genuine customer reviews.</p>
+        <a class="btn btn-primary" href="{%url 'About Us'%}">Find out more here!</a>
+      </div>
+      <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Call to Action Well -->
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+      <div class="card-body">
+        <p class="text-white m-0">Find Eco-Friendly Products from all online stores, on one Web Platform, with customer submitted reviews!</p>
+      </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Simple</h2>
+            <p class="card-text">ECOmmerce is very simple and easy to use! We aim to take the confusion out of online shopping.</p>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Variety</h2>
+            <p class="card-text">Ecommerce aims to have a wide range of products to cater to all your eco-friendly needs. </p>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Honesty</h2>
+            <p class="card-text">ECOmmerce encourages its users to leave reviews on products they have purchased. This allows other consumers to be able to make more educated purchases. </p>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; ECOmmerce Web App 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
